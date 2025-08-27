@@ -76,10 +76,9 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-### 5. Run Migrations & Seeders
+### 5. Run Migrations
 ```bash
 php artisan migrate
-php artisan db:seed
 ```
 
 ### 6. Build Assets
@@ -94,30 +93,6 @@ php artisan serve
 
 Visit `http://127.0.0.1:8000` to see the application.
 
-## 👥 Default Users
-
-After running seeders, you'll have these test accounts:
-
-| Email | Password | Role |
-|-------|----------|------|
-| `admin@healthcare.com` | `password` | Administrator |
-| `doctor@healthcare.com` | `password` | Doctor |
-| `patient@healthcare.com` | `password` | Patient |
-
-## 🗄️ Database Structure
-
-### Users Table
-- Basic info: name, email, password
-- Health data: age, gender, blood type, height, weight, BMI
-- Medical info: allergies, medications, health conditions
-- Contact: phone, address, emergency contact
-- Insurance: provider, policy number
-
-### Health Tips Table
-- Title, content, category
-- Priority levels and tags
-- Active/inactive status
-- Author relationship
 
 ## 🔧 API Endpoints
 
@@ -134,25 +109,25 @@ After running seeders, you'll have these test accounts:
 ## 🎯 Usage Guide
 
 ### For Administrators
-1. **Login** with admin credentials
+1. **Login** with your admin account
 2. **User Management**: Create, edit, and manage user accounts
 3. **System Overview**: Monitor platform usage and statistics
 4. **Health Tips**: Manage and moderate health content
 
 ### For Doctors
-1. **Login** with doctor credentials
+1. **Login** with your doctor account
 2. **Patient Care**: Access patient health information
 3. **Health Tips**: Create and manage health advice
 4. **Dashboard**: View patient statistics and health metrics
 
 ### For Nurses
-1. **Login** with nurse credentials
+1. **Login** with your nurse account
 2. **Patient Care**: Access limited patient information
 3. **Health Monitoring**: Track patient health status
 4. **Limited Admin**: Basic administrative tasks
 
 ### For Patients
-1. **Login** with patient credentials
+1. **Login** with your patient account
 2. **Health Dashboard**: View personal health metrics
 3. **Health Tips**: Access personalized health advice
 4. **Profile Management**: Update personal health information
@@ -200,7 +175,6 @@ npm run watch
 
 ## 🔒 Security Considerations
 
-- **Admin Registration**: Removed from public landing page for security
 - **Role Validation**: All routes protected by role middleware
 - **Input Sanitization**: All user inputs validated and sanitized
 - **API Protection**: Sanctum tokens required for API access
