@@ -94,30 +94,6 @@ php artisan serve
 
 Visit `http://127.0.0.1:8000` to see the application.
 
-## 👥 Default Users
-
-After running seeders, you'll have these test accounts:
-
-| Email | Password | Role |
-|-------|----------|------|
-| `admin@healthcare.com` | `password` | Administrator |
-| `doctor@healthcare.com` | `password` | Doctor |
-| `patient@healthcare.com` | `password` | Patient |
-
-## 🗄️ Database Structure
-
-### Users Table
-- Basic info: name, email, password
-- Health data: age, gender, blood type, height, weight, BMI
-- Medical info: allergies, medications, health conditions
-- Contact: phone, address, emergency contact
-- Insurance: provider, policy number
-
-### Health Tips Table
-- Title, content, category
-- Priority levels and tags
-- Active/inactive status
-- Author relationship
 
 ## 🔧 API Endpoints
 
