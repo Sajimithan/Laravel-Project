@@ -86,6 +86,35 @@
                 color: #fff;
                 text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
             }
+
+            .tip-card {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                padding: 15px;
+                margin: 10px 0;
+                border-left: 4px solid #007bff;
+            }
+
+            .tip-title {
+                font-weight: bold;
+                color: #007bff;
+                margin-bottom: 8px;
+            }
+
+            .tip-content {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+
+            .tip-category {
+                display: inline-block;
+                background-color: #007bff;
+                color: white;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
         </style>
     </head>
     <body>
@@ -93,14 +122,15 @@
             <h1>Welcome to the Health Care System</h1>
             <p>Your trusted partner for health-related information and services.</p>
 
-            <!-- Health Tips Section -->
+            <!-- Dynamic Health Tips Section -->
             <div class="health-tips">
-                <h2>Health Tips</h2>
-                <ul>
-                    <li>Stay hydrated and drink plenty of water.</li>
-                    <li>Eat a balanced diet with lots of fruits and vegetables.</li>
-                    <li>Exercise regularly to maintain a healthy lifestyle.</li>
-                </ul>
+                <h2>Today's Health Tips</h2>
+                <div id="health-tips-container">
+                    <div class="tip-card">
+                        <div class="tip-title">Loading health tips...</div>
+                        <div class="tip-content">Please wait while we load the latest health information for you.</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Buttons for Login and Registration -->
@@ -114,5 +144,60 @@
         <footer>
             <p>&copy; 2024 Health Care System. All Rights Reserved.</p>
         </footer>
+
+        <script>
+            // Load health tips when page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                loadHealthTips();
+            });
+
+            function loadHealthTips() {
+                fetch('/api/health-tips/random')
+                    .then(response => response.json())
+                    .then(tip => {
+                        if (tip) {
+                            displayHealthTip(tip);
+                        } else {
+                            displayDefaultTips();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading health tip:', error);
+                        displayDefaultTips();
+                    });
+            }
+
+            function displayHealthTip(tip) {
+                const container = document.getElementById('health-tips-container');
+                container.innerHTML = `
+                    <div class="tip-card">
+                        <div class="tip-title">${tip.title}</div>
+                        <div class="tip-content">${tip.content}</div>
+                        <span class="tip-category">${tip.category}</span>
+                    </div>
+                `;
+            }
+
+            function displayDefaultTips() {
+                const container = document.getElementById('health-tips-container');
+                container.innerHTML = `
+                    <div class="tip-card">
+                        <div class="tip-title">Stay Hydrated</div>
+                        <div class="tip-content">Drink plenty of water throughout the day to maintain good health.</div>
+                        <span class="tip-category">general</span>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">Balanced Diet</div>
+                        <div class="tip-content">Eat a variety of fruits, vegetables, and lean proteins for optimal nutrition.</div>
+                        <span class="tip-category">nutrition</span>
+                    </div>
+                    <div class="tip-card">
+                        <div class="tip-title">Regular Exercise</div>
+                        <div class="tip-content">Aim for at least 150 minutes of moderate exercise weekly for better health.</div>
+                        <span class="tip-category">exercise</span>
+                    </div>
+                `;
+            }
+        </script>
     </body>
 </html>
