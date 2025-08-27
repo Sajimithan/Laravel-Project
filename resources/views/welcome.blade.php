@@ -189,28 +189,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">Join HealthCare Pro Today</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Choose your role and start managing healthcare operations with our professional platform.
-                </p>
+                                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Choose your role and start managing healthcare operations with our secure platform. 
+                        <span class="text-sm text-gray-500 block mt-2">Administrator accounts are created through secure internal processes.</span>
+                    </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Admin Registration -->
-                <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
-                    <div class="p-6 text-center">
-                        <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-10 h-10 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Administrator</h3>
-                        <p class="text-gray-600 mb-4 text-sm">Full system access and user management capabilities</p>
-                        <button onclick="openRegistrationModal('admin')" class="w-full bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition duration-150 ease-in-out">
-                            Register as Admin
-                        </button>
-                    </div>
-                </div>
-                
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Doctor Registration -->
                 <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-2">
                     <div class="p-6 text-center">
