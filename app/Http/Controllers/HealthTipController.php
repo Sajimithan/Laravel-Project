@@ -45,9 +45,15 @@ class HealthTipController extends Controller
             'content' => 'required|string',
             'category' => 'required|string|in:general,nutrition,exercise,mental-health,prevention,treatment',
             'priority' => 'integer|min:1|max:10',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string|max:50'
+            'tags' => 'nullable|string',
         ]);
+
+        // Process tags from comma-separated string to array
+        $tags = null;
+        if ($request->tags) {
+            $tags = array_map('trim', explode(',', $request->tags));
+            $tags = array_filter($tags); // Remove empty tags
+        }
 
         $tip = HealthTip::create([
             'title' => $request->title,
@@ -55,7 +61,7 @@ class HealthTipController extends Controller
             'category' => $request->category,
             'priority' => $request->priority ?? 1,
             'author_id' => Auth::id(),
-            'tags' => $request->tags
+            'tags' => $tags,
         ]);
 
         return redirect()->route('health-tips.index')
@@ -99,11 +105,24 @@ class HealthTipController extends Controller
             'category' => 'required|string|in:general,nutrition,exercise,mental-health,prevention,treatment',
             'priority' => 'integer|min:1|max:10',
             'is_active' => 'boolean',
-            'tags' => 'nullable|array',
-            'tags.*' => 'string|max:50'
+            'tags' => 'nullable|string',
         ]);
 
-        $healthTip->update($request->all());
+        // Process tags from comma-separated string to array
+        $tags = null;
+        if ($request->tags) {
+            $tags = array_map('trim', explode(',', $request->tags));
+            $tags = array_filter($tags); // Remove empty tags
+        }
+
+        $healthTip->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category' => $request->category,
+            'priority' => $request->priority,
+            'is_active' => $request->has('is_active'),
+            'tags' => $tags,
+        ]);
 
         return redirect()->route('health-tips.index')
             ->with('success', 'Health tip updated successfully.');
