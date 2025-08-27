@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
@@ -11,18 +12,28 @@ class CheckRole
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string  $role
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // Check if the authenticated user has the required role
-        if (auth()->check() && auth()->user()->role !== $role) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+        if (!Auth::check()) {
+            return redirect('login');
         }
 
-        return $next($request);
+        $user = Auth::user();
+        
+        // Check if user has any of the required roles
+        foreach ($roles as $role) {
+            if ($user->hasRole($role)) {
+                return $next($request);
+            }
+        }
+
+        // If no roles match, check if user is admin (admin can access everything)
+        if ($user->isAdmin()) {
+            return $next($request);
+        }
+
+        abort(403, 'Unauthorized action.');
     }
 }
